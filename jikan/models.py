@@ -253,12 +253,6 @@ class Rating(Enum):
     Rx___Hentai = 'Rx - Hentai'
 
 
-class Season(Enum):
-    summer = 'summer'
-    winter = 'winter'
-    spring = 'spring'
-    fall = 'fall'
-
 
 class Score(BaseModel):
     score: int | None = Field(None, description='Scoring value')
@@ -1064,65 +1058,8 @@ class Episode1(BaseModel):
     images: CommonImages | None = None
 
 
-
-
-class Data3(BaseModel):
-    anime: list[MalUrl] | None = None
-    manga: list[MalUrl] | None = None
-    characters: list[MalUrl] | None = None
-
-
-class ClubRelations(BaseModel):
-    data: Data3 | None = None
-
-
-class Club(BaseModel):
-    mal_id: int | None = Field(None, description='MyAnimeList ID')
-    name: str | None = Field(None, description='Club name')
-    url: str | None = Field(None, description='Club URL')
-    images: CommonImages | None = None
-    members: int | None = Field(None, description='Number of club members')
-    category: Category | None = Field(None, description='Club Category')
-    created: str | None = Field(None, description='Date Created ISO8601')
-    access: Access | None = Field(None, description='Club access')
-
-
 class Trailer(TrailerBase, TrailerImages):
     pass
-
-
-class UserMeta(BaseModel):
-    username: str | None = Field(None, description='MyAnimeList Username')
-    url: str | None = Field(None, description='MyAnimeList Profile URL')
-    images: UserImages | None = None
-
-
-class AnimeMeta(BaseModel):
-    mal_id: int | None = Field(None, description='MyAnimeList ID')
-    url: str | None = Field(None, description='MyAnimeList URL')
-    images: AnimeImages | None = None
-    title: str | None = Field(None, description='Entry title')
-
-
-class MangaMeta(BaseModel):
-    mal_id: int | None = Field(None, description='MyAnimeList ID')
-    url: str | None = Field(None, description='MyAnimeList URL')
-    images: MangaImages | None = None
-    title: str | None = Field(None, description='Entry title')
-
-
-class CharacterMeta(BaseModel):
-    mal_id: int | None = Field(None, description='MyAnimeList ID')
-    url: str | None = Field(None, description='MyAnimeList URL')
-    images: CharacterImages | None = None
-    name: str | None = Field(None, description='Entry name')
-
-
-class PersonMeta(BaseModel):
-    mal_id: int | None = Field(None, description='MyAnimeList ID')
-    url: str | None = Field(None, description='MyAnimeList URL')
-    images: PeopleImages | None = None
-    name: str | None = Field(None, description='Entry name')
 
 
 class Genres(BaseModel):
@@ -1157,50 +1094,6 @@ class PersonAnime(BaseModel):
 
 class PeopleSearch(PaginationPlus):
     data: list[Person] | None = None
-
-
-class AnimeItem1(BaseModel):
-    position: str | None = Field(None, description="Person's position")
-    anime: AnimeMeta | None = None
-
-
-class MangaItem1(BaseModel):
-    position: str | None = Field(None, description="Person's position")
-    manga: MangaMeta | None = None
-
-
-class Voice1(BaseModel):
-    role: str | None = Field(None, description="Person's Character's role in the anime")
-    anime: AnimeMeta | None = None
-    character: CharacterMeta | None = None
-
-
-class PersonFull(BaseModel):
-    mal_id: int | None = Field(None, description='MyAnimeList ID')
-    url: str | None = Field(None, description='MyAnimeList URL')
-    website_url: str | None = Field(None, description="Person's website URL")
-    images: PeopleImages | None = None
-    name: str | None = Field(None, description='Name')
-    given_name: str | None = Field(None, description='Given Name')
-    family_name: str | None = Field(None, description='Family Name')
-    alternate_names: list[str] | None = Field(None, description='Other Names')
-    birthday: str | None = Field(None, description='Birthday Date ISO8601')
-    favorites: int | None = Field(
-        None, description='Number of users who have favorited this entry'
-    )
-    about: str | None = Field(None, description='Biography')
-    anime: list[AnimeItem1] | None = None
-    manga: list[MangaItem1] | None = None
-    voices: list[Voice1] | None = None
-
-
-class Datum22(BaseModel):
-    position: str | None = Field(None, description="Person's position")
-    manga: MangaMeta | None = None
-
-
-class PersonManga(BaseModel):
-    data: list[Datum22] | None = None
 
 
 class Datum23(BaseModel):
@@ -1242,29 +1135,9 @@ class UserHistory(BaseModel):
     data: list[History] | None = None
 
 
-class AnimeItem3(BaseModel):
-    entry: AnimeMeta | None = None
-    score: int | None = None
-    status: str | None = None
-    episodes_seen: int | None = None
-    episodes_total: int | None = None
-    date: str | None = Field(None, description='ISO8601 format')
-
-
-class MangaItem3(BaseModel):
-    entry: MangaMeta | None = None
-    score: int | None = None
-    status: str | None = None
-    chapters_read: int | None = None
-    chapters_total: int | None = None
-    volumes_read: int | None = None
-    volumes_total: int | None = None
-    date: str | None = Field(None, description='ISO8601 format')
-
-
 class Data6(BaseModel):
-    anime: list[AnimeItem3] | None = Field(None, description='Last updated Anime')
-    manga: list[MangaItem3] | None = Field(None, description='Last updated Manga')
+    anime: list[AnimeItem] | None = Field(None, description='Last updated Anime')
+    manga: list[MangaItem] | None = Field(None, description='Last updated Manga')
 
 
 class UserUpdates(BaseModel):
@@ -1434,7 +1307,6 @@ class MangaItem(BaseModel):
 class Voice(BaseModel):
     language: str | None = Field(None, description="Character's Role")
     person: PersonMeta | None = None
-
 
 
 class Datum14(BaseModel):
